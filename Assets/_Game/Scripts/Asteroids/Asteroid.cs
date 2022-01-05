@@ -8,7 +8,8 @@ namespace Asteroids
     [RequireComponent(typeof(Rigidbody2D))]
     public class Asteroid : MonoBehaviour
     {
-        [SerializeField] private ScriptableEventInt _onAsteroidDestroyed;
+        //[SerializeField] private ScriptableEventInt _onAsteroidDestroyed;
+        [SerializeField] private IntEvent onAsteroidDestoryed;
         
         [Header("Config:")]
         [SerializeField] private float _minForce;
@@ -24,16 +25,19 @@ namespace Asteroids
         private Rigidbody2D _rigidbody;
         private Vector3 _direction;
         private int _instanceId;
+        private float size;
+
+        [SerializeField] private AsteroidSet asteroidSet;
 
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _instanceId = GetInstanceID();
-            
             SetDirection();
             AddForce();
             AddTorque();
-            SetSize();
+            //SetSize();
+            asteroidSet.Add(_instanceId, this);
         }
         
         private void OnTriggerEnter2D(Collider2D other)
@@ -46,7 +50,7 @@ namespace Asteroids
 
         private void HitByLaser()
         {
-            _onAsteroidDestroyed.Raise(_instanceId);
+            onAsteroidDestoryed.Raise(_instanceId);
             Destroy(gameObject);
         }
 
@@ -96,10 +100,13 @@ namespace Asteroids
             _rigidbody.AddTorque(torque, ForceMode2D.Impulse);
         }
 
-        private void SetSize()
+        public void SetSize(bool isSplited)
         {
-            var size = Random.Range(_minSize, _maxSize);
-            _shape.localScale = new Vector3(size, size, 0f);
+            if (!isSplited)
+            {
+                size = Random.Range(_minSize, _maxSize);
+                _shape.localScale = new Vector3(size, size, 0f);
+            }
         }
     }
 }

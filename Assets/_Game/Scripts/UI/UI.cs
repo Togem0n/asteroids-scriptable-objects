@@ -12,6 +12,7 @@ namespace UI
         [SerializeField] private IntVariable _healthVar;
         [SerializeField] private TextMeshProUGUI _healthText;
         [SerializeField] private ScriptableEventIntReference _onHealthChangedEvent;
+        [SerializeField] private VoidEvent onHealthChanged;
         
         [Header("Score:")]
         [SerializeField] private TextMeshProUGUI _scoreText;
@@ -30,6 +31,11 @@ namespace UI
         public void OnHealthChanged(IntReference newValue)
         {
             SetHealthText($"Health: {newValue.GetValue()}");
+        }
+
+        public void OnHealthChanged(int newValue)
+        {
+            SetHealthText($"Health: {newValue}");
         }
 
         private void SetHealthText(string text)

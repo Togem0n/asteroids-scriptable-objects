@@ -21,7 +21,7 @@ namespace Ship
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _lasers.Add(gameObject);
-            Debug.Log(" Amount Of Lasers: " + _lasers.Amount);
+            //Debug.Log(" Amount Of Lasers: " + _lasers.Amount);
         }
 
         private void OnDestroy()
@@ -33,6 +33,14 @@ namespace Ship
         {
             var trans = transform;
             _rigidbody.MovePosition(trans.position + trans.up * _speed);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(collision.transform.tag == "Asteroid")
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017c14a0b2ceaec4191b684dfd17404f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onAsteroidDestroyed: {fileID: 11400000, guid: 6194a1f60d68f9f4da5519ce74b63a58, type: 2}
+  onAsteroidDestoryed: {fileID: 11400000, guid: 818b44ceb0e22ae42ab7b875075dbb0e, type: 2}
   _minForce: 2
   _maxForce: 6
   _minSize: 0.2
@@ -53,6 +53,7 @@ MonoBehaviour:
   _minTorque: 0.1
   _maxTorque: 0.5
   _shape: {fileID: 1524412162417054026}
+  asteroidSet: {fileID: 11400000, guid: b87bec1b8501df445838bc9f0020ae6b, type: 2}
 --- !u!50 &1784223117350305362
 Rigidbody2D:
   serializedVersion: 4
